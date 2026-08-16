@@ -1,0 +1,15 @@
+1. JavaScript object: {
+  people: [
+    { firstName: 'alice', lastName: 'allson' },
+    { firstName: 'bob', lastName: 'billabong' },
+    { firstName: 'charlie', lastName: 'chaplin' }
+  ]
+}
+2. JSON object: {"people":[{"firstName":"alice","lastName":"allson"},{"firstName":"bob","lastName":"billabong"},{"firstName":"charlie","lastName":"chaplin"}]}
+3. transmitted JSON parsed back to JS: {
+  people: [
+    { firstName: 'alice', lastName: 'allson' },
+    { firstName: 'bob', lastName: 'billabong' },
+    { firstName: 'charlie', lastName: 'chaplin' }
+  ]
+}
