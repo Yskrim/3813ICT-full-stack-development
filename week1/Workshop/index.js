@@ -1,10 +1,10 @@
 /*
-// TASK1
+// TASK1 - Using Node and NPM
 console.log("Hello world, Node.js!");
 */
 
 /*
-// TASK2
+// TASK2 - Working with arrays
 
 // // Create an indexed array of 5 nums and log it ot console
 // const nums = [1, 2, 3, 4, 5];
@@ -53,7 +53,7 @@ console.log("Hello world, Node.js!");
 */
 
 /*
-// TASK 3
+// TASK 3 - Working with JSON
 
 // Create a javascript object with a key of people and a value that is an array of 3 objects each with a firstname and lastname
 
@@ -82,9 +82,23 @@ const newObj = JSON.parse(json);
 console.log("3. transmitted JSON parsed back to JS:", newObj);
 */
 
+/*
 // TASK 4 - NPM packages
 // npm install array-add-num
 const arrayAdd = require('array-add-num').default;
 
 const nums = [5, 4, 3, 8];
 console.log("Sum of the array is:", arrayAdd(nums));
+*/
+
+// TASK 5 - Arrow functions
+// Convert the following declarative function to a function expression and then convert the function expression to use arrow syntax. Demonstrate each version in use by outputting a result to the console log for each function.
+
+function multiplyNums(x, y, z) {
+	return `new number is: ${x * y * z}`;
+}
+
+const mulNums = (x, y, z) => `new number is: ${x * y * z}`;
+
+console.log("Initial function res for [5,4,10]:", multiplyNums(5, 4, 10));
+console.log("Callback res for [5,4,10]:", mulNums(5, 4, 10));
