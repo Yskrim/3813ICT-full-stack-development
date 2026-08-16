@@ -1,0 +1,14 @@
+1. Create an indexed array of 5 nums and log it ot console >>  [ 1, 2, 3, 4, 5 ]
+2. Push a number to the end of nums >> nums.push(99); == [ 1, 2, 3, 4, 5, 99 ]
+3. Add a number to the beginning of the array >> nums.unshift(0); == [
+  0, 1,  2, 3,
+  4, 5, 99
+]
+4. Add new item after the item in 3rd position >> nums.splice(2,1,88); == [
+  0, 1, 88, 3,
+  4, 5, 99
+]
+5. Remove last num from array >> [ 0, 1, 88, 3, 4, 5 ]
+6. Remove the 2nd num >>  nums.splice(1,1); == [ 0, 88, 3, 4, 5 ]
+7. Edit the 5th element in the array to have a value of 100 nums[4] = 100; [ 0, 88, 3, 4, 100 ]
+8. Sort the array in ascending order nums.sort(a,b=>b-a) [ 0, 3, 4, 88, 100 ]
