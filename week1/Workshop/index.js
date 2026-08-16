@@ -52,6 +52,7 @@ console.log("Hello world, Node.js!");
 // console.log(msg8, code8, nums);
 */
 
+/*
 // TASK 3
 
 // Create a javascript object with a key of people and a value that is an array of 3 objects each with a firstname and lastname
@@ -79,3 +80,11 @@ console.log("2. JSON object:", json);
 
 const newObj = JSON.parse(json);
 console.log("3. transmitted JSON parsed back to JS:", newObj);
+*/
+
+// TASK 4 - NPM packages
+// npm install array-add-num
+const arrayAdd = require('array-add-num').default;
+
+const nums = [5, 4, 3, 8];
+console.log("Sum of the array is:", arrayAdd(nums));
