@@ -1,0 +1,2 @@
+Initial function res for [5,4,10]: new number is: 200
+Callback res for [5,4,10]: new number is: 200
