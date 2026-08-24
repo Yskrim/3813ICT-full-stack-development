@@ -1,0 +1,15 @@
+{
+  "name": "lecture3-expresspractice",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Anton",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
