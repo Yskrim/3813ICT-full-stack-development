@@ -36,5 +36,7 @@ Request may be completed successfully or not, so there is a variation of codes, 
 4. Client error response: 400 > 451
 5. Server error response: 500 > 511
 
-The first number defines category, the second two -- the possible reason
+The first number defines category, the second two -- specifies what happened.
+
+At the end of the file, Express.js is mentioned to be preffered over the system server design.
 
