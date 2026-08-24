@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+		<div>
+			<h2>Log in to your account</h2>
+			<form method="POST" action="/login">
+				<input type="text" id="email" name="email" placeholder="email" />
+				<input
+					type="password"
+					id="password"
+					name="password"
+					placeholder="password"
+				/>
+				<button type="submit">Log in</button>
+			</form>
+		</div>
+
+		<script>
+			document.querySelector("button").addEventListener("click", async (e) => {
+				e.preventDefault();
+
+				const email = document.getElementById("email").value;
+				const password = document.getElementById("password").value;
+
+				const request = new Request(window.location, {
+					method: "POST", 
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						email,
+						password,
+					}),
+				});
+
+				try {
+					const response = await fetch(request);
+					const data = await response.json();
+
+					if (data.ok) {
+						window.location = "/account";
+					} else {
+                        alert(`Login failed: ${data.message || "Unknown error"}`);
+					}
+				} catch (err) {
+					console.log(err.message);
+				}
+			});
+		</script>
+	</body>
+</html>

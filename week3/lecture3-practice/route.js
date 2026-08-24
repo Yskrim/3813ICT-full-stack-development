@@ -25,7 +25,7 @@ module.exports = {
 			renderHTML("./index.html", response);
 		} else { 
             // no other routes yet
-			resonse.writeHead(404);
+			response.writeHead(404);
 			response.write("Route not defined");
 			response.end();
 		}
