@@ -1,0 +1,16 @@
+{
+  "name": "lab3-express",
+  "version": "1.0.0",
+  "description": "workshop for express.js and node.js server side",
+  "license": "ISC",
+  "author": "Anton Korotkov",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "formidable": "^3.5.4"
+  }
+}
