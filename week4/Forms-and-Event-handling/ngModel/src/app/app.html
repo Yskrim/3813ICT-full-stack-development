@@ -1,0 +1,42 @@
+<section>
+  <h2>1. ngModel — обновляется на каждый ввод</h2>
+  <form>
+    <input name="name" [(ngModel)]="name" placeholder="First name" />
+    <input name="lastname" [(ngModel)]="lastname" placeholder="Last name" />
+    <p>Hello {{ name }} {{ lastname }}</p>
+  </form>
+</section>
+
+<section>
+  <h2>2. Event handling — логика в методе компонента</h2>
+
+  <!--
+    Синтаксис события: (имяСобытия)="метод()"
+    (ngSubmit) — событие отправки формы (Enter или кнопка type="submit")
+    Angular сам отменяет обычную перезагрузку страницы
+  -->
+  <form (ngSubmit)="onLogin()">
+    <input name="email" type="email" [(ngModel)]="email" placeholder="Email" />
+    <input
+      name="password"
+      type="password"
+      [(ngModel)]="password"
+      placeholder="Password"
+    />
+
+    <!-- type="submit" запускает (ngSubmit) на форме -->
+    <button type="submit">Login</button>
+  </form>
+
+  @if (loginMessage) {
+    <p>{{ loginMessage }}</p>
+  }
+
+  <!--
+    (click) — обычное DOM-событие клика
+    источник: button → действие: click → обработчик: onButtonClick()
+  -->
+  <button type="button" (click)="onButtonClick()">
+    Clicked {{ clickCount }} times
+  </button>
+</section>

@@ -1,0 +1,62 @@
+:host {
+  display: block;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+
+main {
+  max-width: 36rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+section {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #ddd;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+input {
+  padding: 0.4rem 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+code {
+  font-size: 0.9em;
+  background: #f0f0f0;
+  padding: 0.1em 0.35em;
+}
+
+.notes ul {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.notes li {
+  margin-bottom: 0.4rem;
+}

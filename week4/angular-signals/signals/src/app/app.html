@@ -1,0 +1,36 @@
+<main>
+  <h1>Angular Signals — demo</h1>
+
+  <section>
+    <h2>1. Writable signal: name</h2>
+
+    <!-- интерполируем метод класса greeting() -->
+    <p>{{ greeting() }}</p>
+
+    <!-- интерполируем метод класса name() -->
+    <!-- мы не пишем свойство имя строкой, имя это сигнал = функцияя, которая передает текущее значение сигнала -->
+    <p>Raw value: <code>name()</code> → {{ name() }}</p>
+
+    <!-- [] - квадратные скобки передают значение, () - круглые скобки принимают значение -->
+    <!-- [value] == one-way binding -- value принимает значение сигнала из метода класса name()
+    (input) == one-way binding -- input отдает значение сигнала из метода класса name() -->
+    <label>
+      <input [value]="name()" (input)="setName($any($event.target).value)" />
+    </label>
+  </section>
+
+  <section>
+    <h2>2. Writable signal: count</h2>
+    
+    <!-- интерполируем метод класса count()  -->
+    <p>count = {{ count() }}</p>
+
+    <!-- интерполируем метод класса doubled(), который вычисляется сигналом computed() -->
+    <p>doubled (computed) = {{ doubled() }}</p>
+
+    <!-- кнопки используют обработчики событий
+    (click) == one-way binding отдает событие обработчику -->
+    <button type="button" (click)="increment()">+1 (.update)</button>
+    <button type="button" (click)="reset()">Reset (.set)</button>
+  </section>
+</main>
