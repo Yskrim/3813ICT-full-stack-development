@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "firstAngular": {
+    "week4": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -26,10 +26,10 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"            
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "firstAngular:build:production"
+              "buildTarget": "week4:build:production"
             },
             "development": {
-              "buildTarget": "firstAngular:build:development"
+              "buildTarget": "week4:build:development"
             }
           },
           "defaultConfiguration": "development"

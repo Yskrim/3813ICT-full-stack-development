@@ -1,0 +1,19 @@
+<div class="card bg-white py-5 px-5 rounded shadow shadow-sm border-light">
+  <h3 for="login" class="text-lg pb-4 text-center">Log in to your account</h3>
+  <form id="login" class="d-flex flex-column gap-3" (input)="onInput()">
+    <input class="form-control" name="email" type="text" placeholder="email" [(ngModel)]="email" />
+    <input
+      class="form-control"
+      name="password"
+      type="password"
+      placeholder="password"
+      [(ngModel)]="password"
+    />
+    @if (errorMessage) {
+      <button type="reset" class="btn btn-danger" (click)="onReset()">Try Again</button>
+      <span class="text-danger text-center">{{ errorMessage }}</span>
+    } @else {
+      <button (click)="onSubmit()" class="btn btn-primary">Log In</button>
+    }
+  </form>
+</div>
