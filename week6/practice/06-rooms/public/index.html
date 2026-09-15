@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Практика: комнаты</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; }
+        #log { list-style: none; padding: 0; }
+        #log li { padding: 4px 8px; border-bottom: 1px solid #eee; font-family: monospace; }
+        .row { margin: 12px 0; }
+        input { padding: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Практика: комнаты</h1>
+
+    <p>
+        Я: <b id="user">—</b> ·
+        статус: <b id="status">не подключён</b> ·
+        мой socket.id: <code id="sid">—</code>
+    </p>
+    <p>
+        Имя пользователя берётся из адреса: открывай
+        <code>http://localhost:3000/?user=anton</code> и
+        <code>http://localhost:3000/?user=guest</code> в разных окнах.
+    </p>
+
+    <div class="row">
+        Канал: <input id="room" value="general" size="12">
+        <button id="join">Войти в канал</button>
+    </div>
+
+    <form id="form" class="row">
+        <input id="text" placeholder="сообщение в канал" autocomplete="off" size="40">
+        <button type="submit">Отправить</button>
+    </form>
+
+    <div class="row">
+        Личное сообщение — socket.id получателя:
+        <input id="to" size="22" placeholder="вставь id из лога">
+        <input id="privateText" size="20" placeholder="текст">
+        <button id="sendPrivate">Отправить лично</button>
+    </div>
+
+    <ul id="log"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const userName = new URLSearchParams(location.search).get('user') || 'guest';
+
+        const userEl = document.getElementById('user');
+        const statusEl = document.getElementById('status');
+        const sidEl = document.getElementById('sid');
+        const logEl = document.getElementById('log');
+        const roomEl = document.getElementById('room');
+        const textEl = document.getElementById('text');
+        const toEl = document.getElementById('to');
+        const privateTextEl = document.getElementById('privateText');
+
+        userEl.textContent = userName;
+
+        function addLine(line) {
+            const li = document.createElement('li');
+            li.textContent = line;
+            logEl.append(li);
+        }
+
+        // имя пользователя уходит на сервер при подключении (handshake)
+        const socket = io('http://localhost:3000', { auth: { user: userName } });
+
+        socket.on('connect', () => {
+            statusEl.textContent = 'подключён';
+            sidEl.textContent = socket.id;
+        });
+
+        socket.on('disconnect', (reason) => {
+            statusEl.textContent = 'отключён (' + reason + ')';
+        });
+
+        socket.on('connect_error', (err) => {
+            statusEl.textContent = 'ошибка подключения';
+            addLine('[connect_error] ' + err.message);
+        });
+
+        socket.onAny((event, ...args) => {
+            const payload = args
+                .map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a)))
+                .join(' ');
+            addLine('[' + event + '] ' + payload);
+        });
+
+        document.getElementById('join').addEventListener('click', () => {
+            socket.emit('join-channel', roomEl.value.trim());
+        });
+
+        document.getElementById('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const text = textEl.value.trim();
+            if (!text) return;
+            socket.emit('message', text);
+            textEl.value = '';
+        });
+
+        document.getElementById('sendPrivate').addEventListener('click', () => {
+            const to = toEl.value.trim();
+            const text = privateTextEl.value.trim();
+            if (!to || !text) return;
+            socket.emit('private-message', { to, text });
+            privateTextEl.value = '';
+        });
+
+        // Для задания 3: сокет доступен в консоли браузера как window.socket,
+        // чтобы можно было попробовать «взломать» сервер вручную.
+        window.socket = socket;
+    </script>
+</body>
+</html>
