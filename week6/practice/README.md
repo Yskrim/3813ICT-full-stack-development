@@ -30,7 +30,7 @@ npm run rooms:1       # комнаты, тема 06
 
 ```ts
 class Observer {
-    name: string;                        // так работает
+    name: string; // так работает
     constructor(name: string) {
         this.name = name;
     }
@@ -45,14 +45,14 @@ class Observer {
 
 ## Темы
 
-| Папка | Тема | Конспект |
-| --- | --- | --- |
-| `01-observer-pattern` | Паттерн Observer своими руками, дженерики | `6-0-ReactiveProgramming.md`, `6-1-observables.md` |
-| `02-rxjs` | Subject, BehaviorSubject, контракт потока, отписка | `6-1-observables.md`, `6-1-Observables-explained.md` |
-| `03-promises` | Promise, then-цепочки, async/await, Promise.all | `6-2-Promises-and-async-functions.md` |
-| `04-sockets-server` | Socket.IO сервер, рассылка, CORS, модульность | `6-3-Sockets.md`, `6-5-Sockets-coding-example.md` |
-| `05-socket-observable` | Обёртка сокета в Observable, teardown, сервис | `6-4-Socket-and-Observable.md` |
-| `06-rooms` | Комнаты, личные сообщения, проверка прав | `6-6-Socket-io-rooms.md` |
+| Папка                  | Тема                                               | Конспект                                             |
+| ---------------------- | -------------------------------------------------- | ---------------------------------------------------- |
+| `01-observer-pattern`  | Паттерн Observer своими руками, дженерики          | `6-0-ReactiveProgramming.md`, `6-1-observables.md`   |
+| `02-rxjs`              | Subject, BehaviorSubject, контракт потока, отписка | `6-1-observables.md`, `6-1-Observables-explained.md` |
+| `03-promises`          | Promise, then-цепочки, async/await, Promise.all    | `6-2-Promises-and-async-functions.md`                |
+| `04-sockets-server`    | Socket.IO сервер, рассылка, CORS, модульность      | `6-3-Sockets.md`, `6-5-Sockets-coding-example.md`    |
+| `05-socket-observable` | Обёртка сокета в Observable, teardown, сервис      | `6-4-Socket-and-Observable.md`                       |
+| `06-rooms`             | Комнаты, личные сообщения, проверка прав           | `6-6-Socket-io-rooms.md`                             |
 
 ## Что считать выполненным
 

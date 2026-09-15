@@ -10,18 +10,28 @@ export interface Subscription {
     unsubscribe(): void;
 }
 
-export class Subject<T> {
+export class Subject<T> implements Observer<T>{
     // TODO: приватный список наблюдателей
+    private observers: Observer<T>[] = [];
 
     subscribe(observer: Observer<T>): Subscription {
         // TODO: добавить наблюдателя в список и вернуть объект,
         // чей unsubscribe() убирает ИМЕННО его
-        throw new Error('не реализовано');
+        this.observers.push(observer);
+
+        return {
+            unsubscribe: () => {
+                // TODO: оставить в this.observers всех, КРОМЕ observer.
+                this.observers.filter(o => o !== observer);
+            }
+        }
     }
 
     next(value: T): void {
         // TODO: разослать значение всем текущим наблюдателям
-        throw new Error('не реализовано');
+        for(const observer of this.observers){
+            observer.next(value);
+        }
     }
 }
 
@@ -41,7 +51,7 @@ chat.subscribe({ next: () => console.log('счётчик: +1') });
 chat.next({ author: 'bob', text: 'как дела' });
 
 listSub.unsubscribe();
-chat.next({ author: 'bob', text: 'этого списку уже не видно' });
+chat.next({ author: 'bob', text: 'этот спискок уже не видно' });
 
 console.log('в списке:', list.map((m) => m.text));
 
