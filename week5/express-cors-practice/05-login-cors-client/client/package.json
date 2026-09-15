@@ -1,0 +1,11 @@
+{
+	"name": "05-login-cors-client-client",
+	"version": "1.0.0",
+	"description": "Task 5: plain HTML/JS login + profile client",
+	"scripts": {
+		"start": "http-server public -p 5500"
+	},
+	"devDependencies": {
+		"http-server": "^14.1.1"
+	}
+}

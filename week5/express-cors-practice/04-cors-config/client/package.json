@@ -1,0 +1,11 @@
+{
+	"name": "04-cors-config-client",
+	"version": "1.0.0",
+	"description": "Task 4: static client for testing CORS config + preflight",
+	"scripts": {
+		"start": "http-server public -p 5500"
+	},
+	"devDependencies": {
+		"http-server": "^14.1.1"
+	}
+}

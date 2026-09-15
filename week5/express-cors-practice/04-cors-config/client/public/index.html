@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Task 4 - CORS Config Client</title>
+</head>
+<body>
+	<h1>Client on http://localhost:5500</h1>
+
+	<button id="btnGet">GET /api/items</button>
+	<button id="btnPutOk">PUT with API key</button>
+	<button id="btnPutBad">PUT without API key</button>
+
+	<pre id="output">click a button...</pre>
+
+	<script>
+		const API = "http://localhost:3000";
+		const out = document.getElementById("output");
+
+		function show(data) {
+			out.textContent = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+		}
+
+		document.getElementById("btnGet").onclick = () => {
+			fetch(`${API}/api/items`)
+				.then((r) => r.json())
+				.then(show)
+				.catch((err) => show("Error: " + err));
+		};
+
+		document.getElementById("btnPutOk").onclick = () => {
+			fetch(`${API}/api/items/1`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					"X-Api-Key": "secret123",
+				},
+				body: JSON.stringify({ name: "Updated item" }),
+			})
+				.then((r) => r.json())
+				.then(show)
+				.catch((err) => show("Error: " + err));
+		};
+
+		document.getElementById("btnPutBad").onclick = () => {
+			fetch(`${API}/api/items/1`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ name: "Updated item" }),
+			})
+				.then((r) => r.json())
+				.then(show)
+				.catch((err) => show("Error: " + err));
+		};
+	</script>
+</body>
+</html>

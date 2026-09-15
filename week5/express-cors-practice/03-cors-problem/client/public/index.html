@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Task 3 - CORS Client</title>
+</head>
+<body>
+	<h1>Client on http://localhost:5500</h1>
+	<p>Calling the API on http://localhost:3000 — open DevTools console.</p>
+	<pre id="output">loading...</pre>
+	<script>
+		fetch("http://localhost:3000/api/message")
+			.then((r) => r.json())
+			.then((data) => {
+				document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+			})
+			.catch((err) => {
+				document.getElementById("output").textContent = "Fetch failed - check console: " + err;
+				console.error("Fetch error:", err);
+			});
+	</script>
+</body>
+</html>

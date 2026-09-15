@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Task 5 - Profile</title>
+</head>
+<body>
+	<h1>Profile</h1>
+
+	<form id="profileForm">
+		<label>Username: <input type="text" id="username" /></label><br />
+		<label>Birthdate: <input type="text" id="birthdate" /></label><br />
+		<label>Age: <input type="number" id="age" /></label><br />
+		<label>Email: <input type="email" id="email" /></label><br />
+		<button type="submit">Save</button>
+	</form>
+
+	<button id="logout">Log out</button>
+
+	<script>
+		// TODO: on load, read user from localStorage
+		// - if empty -> redirect to index.html (no one logged in)
+		// - else -> fill the form fields with the stored user data
+
+		// TODO: on form submit -> update localStorage with edited values (preventDefault!)
+
+		document.getElementById("logout").addEventListener("click", function () {
+			// TODO: clear localStorage, redirect to index.html
+		});
+	</script>
+</body>
+</html>
