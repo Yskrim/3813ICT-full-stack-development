@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Task 1 - Basic Server</title>
+</head>
+<body>
+	<h1>Task 1 — Basic Express Server</h1>
+	<p>If you can see this, express.static is working.</p>
+	<pre id="status">loading /api/status ...</pre>
+	<script>
+		fetch("/api/status")
+			.then((r) => r.json())
+			.then((data) => {
+				document.getElementById("status").textContent = JSON.stringify(data, null, 2);
+			})
+			.catch((err) => {
+				document.getElementById("status").textContent = "Error: " + err;
+			});
+	</script>
+</body>
+</html>

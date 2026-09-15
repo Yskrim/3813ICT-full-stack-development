@@ -1,0 +1,11 @@
+{
+	"name": "03-cors-problem-client",
+	"version": "1.0.0",
+	"description": "Task 3: static client served from a different origin than the API",
+	"scripts": {
+		"start": "http-server public -p 5500"
+	},
+	"devDependencies": {
+		"http-server": "^14.1.1"
+	}
+}

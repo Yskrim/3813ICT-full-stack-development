@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Task 5 - Login</title>
+</head>
+<body>
+	<h1>Login</h1>
+
+	<form id="loginForm">
+		<label>Username: <input type="text" id="username" /></label><br />
+		<label>Password: <input type="password" id="password" /></label><br />
+		<button type="submit">Log in</button>
+	</form>
+
+	<p id="error" style="color: red"></p>
+
+	<script>
+		const API = "http://localhost:3000";
+
+		document.getElementById("loginForm").addEventListener("submit", function (e) {
+			e.preventDefault();
+			const username = document.getElementById("username").value;
+			const password = document.getElementById("password").value;
+
+			// TODO: fetch(`${API}/api/auth`, { method: "POST", ... })
+			// - on valid === true: localStorage.setItem(...), redirect to profile.html
+			// - on valid === false: show error message in #error
+		});
+	</script>
+</body>
+</html>
