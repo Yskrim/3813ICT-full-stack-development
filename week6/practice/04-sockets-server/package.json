@@ -1,0 +1,6 @@
+{
+  "name": "week6-practice-sockets",
+  "private": true,
+  "type": "commonjs",
+  "description": "Серверные задания пишем на CommonJS (require), как в лекции и в ассайнменте"
+}

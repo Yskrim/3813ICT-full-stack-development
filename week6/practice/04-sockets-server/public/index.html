@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Практика: сокеты</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; }
+        #log { list-style: none; padding: 0; }
+        #log li { padding: 4px 8px; border-bottom: 1px solid #eee; font-family: monospace; }
+        .row { margin: 12px 0; }
+    </style>
+</head>
+<body>
+    <h1>Практика: сокеты</h1>
+
+    <p>Статус: <b id="status">не подключён</b> · мой socket.id: <code id="sid">—</code></p>
+
+    <div class="row">
+        <label>
+            <input type="checkbox" id="localEcho">
+            добавлять своё сообщение локально (нужно для задания 2)
+        </label>
+    </div>
+
+    <form id="form" class="row">
+        <input id="text" placeholder="сообщение" autocomplete="off" size="40">
+        <button type="submit">Отправить</button>
+    </form>
+
+    <ul id="log"></ul>
+
+    <!-- клиентскую библиотеку раздаёт сам socket.io-сервер, ставить ничего не нужно -->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        const statusEl = document.getElementById('status');
+        const sidEl = document.getElementById('sid');
+        const logEl = document.getElementById('log');
+        const formEl = document.getElementById('form');
+        const textEl = document.getElementById('text');
+        const localEchoEl = document.getElementById('localEcho');
+
+        function addLine(line) {
+            const li = document.createElement('li');
+            li.textContent = line;
+            logEl.append(li);
+        }
+
+        const socket = io('http://localhost:3000');
+
+        socket.on('connect', () => {
+            statusEl.textContent = 'подключён';
+            sidEl.textContent = socket.id;
+        });
+
+        socket.on('disconnect', (reason) => {
+            statusEl.textContent = 'отключён (' + reason + ')';
+        });
+
+        socket.on('connect_error', (err) => {
+            statusEl.textContent = 'ошибка подключения';
+            addLine('[connect_error] ' + err.message);
+        });
+
+        // печатаем ЛЮБОЕ событие от сервера — удобно, пока не знаешь, что придёт
+        socket.onAny((event, ...args) => {
+            const payload = args
+                .map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a)))
+                .join(' ');
+            addLine('[' + event + '] ' + payload);
+        });
+
+        formEl.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const text = textEl.value.trim();
+            if (!text) return;
+
+            socket.emit('message', text);
+
+            if (localEchoEl.checked) {
+                addLine('[локально] ' + text);
+            }
+
+            textEl.value = '';
+        });
+    </script>
+</body>
+</html>

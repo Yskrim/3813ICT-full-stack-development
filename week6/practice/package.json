@@ -1,0 +1,23 @@
+{
+  "name": "week6-practice",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Практика по week6: обзерверы, RxJS, промисы, сокеты, комнаты",
+  "scripts": {
+    "sockets:1": "node 04-sockets-server/task-1-echo.js",
+    "sockets:2": "node 04-sockets-server/task-2-chat.js",
+    "sockets:3": "node 04-sockets-server/task-3/server.js",
+    "sockets:3-client": "node 04-sockets-server/task-3/client-server.js",
+    "rooms:1": "node 06-rooms/task-1-rooms.js",
+    "rooms:2": "node 06-rooms/task-2-private.js",
+    "rooms:3": "node 06-rooms/task-3-secure.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "rxjs": "^7.8.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  }
+}
