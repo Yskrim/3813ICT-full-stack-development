@@ -1,1 +1,48 @@
-<p>playground works!</p>
+<style>
+    .dark {
+        background-color: black;
+        color: white;
+
+    }
+
+    .dark button {
+        background-color: rgb(58, 58, 58);
+        color: white;
+    }
+
+    .dark input {
+        background-color: rgb(58, 58, 58);
+        color: white;
+    }
+</style>
+
+<div [style.font-size.px]="fontSize" [class]="theme">
+    <p>playground works!</p>
+
+    
+    <form  [style.font-size.px]="fontSize">
+        <div>
+            <label>Theme settings:  </label>
+            <label>
+                <span>Light theme</span>
+                <input type="radio" name="theme" value="light" [ngModel]="theme" (ngModelChange)="updatePrefs({ theme: 'light' })"/>
+            </label>
+            <label>
+                <span>Dark theme</span>
+                <input type="radio" name="theme" value="dark" [ngModel]="theme" (click)="theme !== 'dark' && updatePrefs({ theme: 'dark' })"/>
+            </label>
+        </div>
+        <div>
+            <label>Font settings:  {{ fontSize }} </label>
+            <button type="button" (click)="updatePrefs({ fontSize: fontSize + 2})" >font-size: + 2</button>
+            <button type="button" (click)="updatePrefs({ fontSize: fontSize - 2})" >font-size: - 2</button>
+            <button type="button" (click)="fontSize !== 16 && updatePrefs({ fontSize: 16 })" >font-size: default</button>
+        </div>
+        <div>
+            <label>Last Channel Id:  </label>
+            <input type="number" disabled name="display" [value]="lastChannelId"/>
+            <input type="number" #channelInput />
+            <button type="button" (click)="channelInput.value && updatePrefs({ lastChannelId: channelInput.valueAsNumber })">update</button>
+        </div>
+    </form>
+</div>
