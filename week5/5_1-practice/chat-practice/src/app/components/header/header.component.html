@@ -1,0 +1,12 @@
+<nav>
+  @if (currentUser(); as user) {
+    <div>
+      <p>logged in as {{ user.username }}</p>
+      <button (click)="logout()">logout</button>
+    </div>
+  } @else {
+    @for (user of testUsers; track user.id) {
+      <button (click)="loginAs(user.username)">login as {{ user.username }}</button>
+    }
+  }
+</nav>
