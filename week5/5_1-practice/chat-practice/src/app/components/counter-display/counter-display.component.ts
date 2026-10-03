@@ -8,5 +8,5 @@ import { CounterService } from '../../services/counter.service';
   templateUrl: './counter-display.component.html',
 })
 export class CounterDisplayComponent {
-  counterService = inject(CounterService);
+  counterService = new CounterService;
 }
