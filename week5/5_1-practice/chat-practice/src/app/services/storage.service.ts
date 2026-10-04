@@ -5,28 +5,28 @@ import { Injectable } from '@angular/core';
 })
 
 export class StorageService {
-    get<T>(key: string): T | null {
-        try{
-            const raw = localStorage.getItem(key);
+    get<T>(key: string, storage: Storage = localStorage): T | null {
+        try {
+            const raw = storage.getItem(key);
             return raw === null ? null : (JSON.parse(raw) as T);
-        } catch(err) {
+        } catch (err) {
             console.warn('Item not found: ', key, err);
             return null;
         }
     }
 
-    set(key: string, value: unknown ): void {
-        try{
-            localStorage.setItem(key, JSON.stringify(value));
-        } catch(err) {
+    set(key: string, value: unknown, storage: Storage = localStorage): void {
+        try {
+            storage.setItem(key, JSON.stringify(value));
+        } catch (err) {
             console.warn('Could not save item: ', key, err);
         }
     }
 
-    remove(key: string): void{
-        try{ 
-            localStorage.removeItem(key);
-        } catch(err) {
+    remove(key: string, storage: Storage = localStorage): void {
+        try {
+            storage.removeItem(key);
+        } catch (err) {
             console.warn('Item does not exist: ', key, err);
         }
     }

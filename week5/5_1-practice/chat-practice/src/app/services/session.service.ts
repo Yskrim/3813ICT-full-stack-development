@@ -1,7 +1,6 @@
-import { inject, Injectable, OnInit, signal, computed } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { StorageService } from './storage.service';
-
-export type Role = 'superadmin' | 'groupadmin' | 'user';
+import { User, Role } from './auth.service';
 
 export interface SessionUser {
     id: number;
@@ -9,78 +8,49 @@ export interface SessionUser {
     role: Role;
 }
 
-export const TEST_USERS: SessionUser[] = [
-    { id: 1, username: 'super', role: 'superadmin' },
-    { id: 2, username: 'anna', role: 'groupadmin' },
-    { id: 3, username: 'ben', role: 'user' },
-];
-
-const KEY = 'User';
-
 @Injectable({ providedIn: 'root' })
 
-export class SessionService implements OnInit{ 
-    readonly currentUser = signal<SessionUser | null>(null);
-    protected isLoggedIn = computed(() => this.currentUser() !== null);
-    
-    // inject a storage service
+export class SessionService {
+    private sessionKey: string = 'user';
+    readonly sessionUser = signal<SessionUser | null>(null);
+
+    // DI
     private storage = inject(StorageService);
 
-    // add an event listener for other windows
-    constructor(){
-        window.addEventListener('storage', e =>{
-            if(e.key !== KEY && e.key !== null) return;
-            this.loadUser();
+    constructor() {
+        this.readSessionUser();
+
+        // add an event listener for other windows
+        window.addEventListener('storage', e => {
+            if (e.key !== this.sessionKey && e.key !== null) return;
+            this.readSessionUser();
         });
     }
 
-    login(username: string): void{
-        try {
-            // iterate through all users and find the one with matching username
-            const matchingUser: SessionUser | undefined = TEST_USERS.find(u => u.username === username);
-            
-            if (matchingUser) {
-                // save this user to sessionStorage (localStorage for now)
-                this.storage.set('User', matchingUser);
-                
-                // save this user to this service
-                this.currentUser.set(matchingUser);
+    // set session key to user id idk?
+    setSessionKey(key: string): void {
+        this.sessionKey = key;
+    }
 
-                console.log(localStorage.getItem('User'));
-            }
-        } catch(err) {
+    // read stored user from session
+    readSessionUser(): void {
+        try {
+            const user: SessionUser | null = this.storage.get(this.sessionKey);
+            this.sessionUser.set(user);
+        } catch (err) {
             console.warn(err);
         }
     }
 
-    logout(): void {
-        // clear sessionStorage OR remove the key, doesn't matter
-        try{
-            this.storage.remove('User');
-            console.log(localStorage.getItem('User'));
-            this.loadUser();
+    writeSessionUser(user: User): void {
+        const curUser: SessionUser | null = this.storage.get(this.sessionKey);
 
-        } catch(e) {
-            console.log("No user was logged in");
+        if (!curUser) {
+            this.storage.set(this.sessionKey, user as SessionUser);
+            this.sessionUser.set(user);
+        } else {
+            console.warn("Need to logout before logging in");
         }
-    }
-
-    readUser(): SessionUser | null {
-        try{
-            const user = this.storage.get(KEY);
-            return user ? user as SessionUser : null;
-        } catch {
-            return null;
-        }
-    }
-
-    loadUser(){
-        this.currentUser.set(this.readUser()); 
-    }
-
-    ngOnInit(){
-        // on start, get the user from storage if stored else null
-       this.loadUser();
     }
 }
 

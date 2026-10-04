@@ -1,5 +1,5 @@
-import { Component, inject, AfterViewInit } from '@angular/core';
-import { SessionService, SessionUser, TEST_USERS } from '../../services/session.service';
+import { Component, inject, AfterViewInit, computed } from '@angular/core';
+import { AuthService, TEST_USERS, User } from '../../services/auth.service';
 
 
 @Component({
@@ -10,29 +10,16 @@ import { SessionService, SessionUser, TEST_USERS } from '../../services/session.
 })
 
 export class HeaderComponent {
-  private sessionService = inject(SessionService);
-  private currentUser = this.sessionService.currentUser;
-  private testUsers: SessionUser[] = TEST_USERS;
+  private auth = inject(AuthService);
+  private currentUser = this.auth.currentUser;
+  private testUsers: User[] = TEST_USERS;
 
   loginAs(username: string): void {
-    try{
-      this.sessionService.login(username);
-      // this.loadUser();
-    } catch(err) {
-      console.warn(err);
-    }
-    
+    const user = TEST_USERS.find(u => u.username === username)
+    if(user) this.auth.loginAs(user);
   }
 
   logout(): void {
-    this.sessionService.logout();
-  }
-
-  // loadUser(): void{
-  //   this.currentUser = this.sessionService.currentUser();
-  // }
-
-  ngAfterViewInit(){
-    this.sessionService.loadUser();
+    this.auth.logout();
   }
 }

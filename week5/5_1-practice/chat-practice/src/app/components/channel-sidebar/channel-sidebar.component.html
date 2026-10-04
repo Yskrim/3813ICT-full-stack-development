@@ -9,9 +9,9 @@
     }
   </ul>
 
-  <form>
+  <form (submit)="handleSubmit($event)">
     <p>create new channel</p>
-    <input value="" name="chanName" #chName />
-    <button type="button" (click)="cs.add(chName.value)">Create</button>
+    <input [(ngModel)]="chName" name="chanName"/>
+    <button type="submit">Create</button>
   </form>
 </div>

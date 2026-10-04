@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   imports: [RouterOutlet, RouterLink, HeaderComponent],
@@ -10,4 +11,5 @@ import { HeaderComponent } from './components/header/header.component';
 })
 export class App {
   protected readonly title = signal('chat-practice');
+  protected auth = inject(AuthService);
 }
