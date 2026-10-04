@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  border: 1px solid black;
+  width: 20%;
+  flex-shrink: 0;
+}
+
+
+
+.channel-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.channel-messages-container {
+  border: 1px solid black;
+  flex: auto;
+}
+
+

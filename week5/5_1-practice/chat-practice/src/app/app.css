@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+router-outlet + * {
+  flex: 1; /* страница забирает оставшуюся высоту */
+  min-height: 0;
+  display: block;
+}
+
+.navbar{
+  padding: 10px;
+}
+.navbar a {
+  margin: 0 0 0 10px;
+}

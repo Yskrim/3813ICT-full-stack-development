@@ -1,0 +1,7 @@
+<div class="channel-header">
+    @if( cs.currentChannel() ) {
+        <span>{{ cs.currentChannel()?.name }} : {{ cs.currentChannel()?.id }}</span>
+    } @else {
+        <span>no channel selected</span>
+    }
+</div>

@@ -1,0 +1,15 @@
+.dark {
+    background-color: black;
+    color: white;
+
+}
+
+.dark button {
+    background-color: rgb(58, 58, 58);
+    color: white;
+}
+
+.dark input {
+    background-color: rgb(58, 58, 58);
+    color: white;
+}

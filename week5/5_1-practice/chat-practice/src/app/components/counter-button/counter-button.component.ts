@@ -6,6 +6,7 @@ import { CounterService } from '../../services/counter.service';
   selector: 'app-counter-button',
   styleUrl: './counter-button.component.css',
   templateUrl: './counter-button.component.html',
+  providers: [CounterService]
 })
 
 export class CounterButtonComponent {
