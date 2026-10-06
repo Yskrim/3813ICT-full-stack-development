@@ -4,7 +4,7 @@
   <a routerLink="/playground">Playground</a>
   <a routerLink="/services-lab">Services lab</a>
   <a routerLink="/channels">Channels</a>
-  @if( auth.hasRole('admin', 'superadmin')){
+  @if( auth.hasRole('groupadmin', 'superadmin')){
     <a routerLink="/admin">Admin</a>
   }
 </nav>

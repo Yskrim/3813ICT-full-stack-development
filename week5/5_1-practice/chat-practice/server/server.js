@@ -5,9 +5,9 @@ const cors = require('cors');
 const PORT = 3000;
 
 // cors middleware
-    app.use(cors({
-        origin: 'http://localhost:4200'
-    }));
+    // app.use(cors({
+    //     origin: 'http://localhost:4200'
+    // }));
 //
 
 // logging api
