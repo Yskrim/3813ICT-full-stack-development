@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "backend": "npm run dev --prefix server",
+    "prod": "ng build && npm start --prefix server", 
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
