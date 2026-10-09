@@ -1,17 +1,19 @@
-<label>
-    <h3>Log in form</h3>
+<div class="page login-page">
+  <div class="container login-card">
+    <h2>Log in</h2>
     <form (ngSubmit)="login()" (input)="handleWrongCreds()">
-        <label>
-            <span>Username</span>
-            <input name="username" [(ngModel)]="username"/>
-        </label>
-        <label>
-            <span>Password</span>
-            <input name="password" [(ngModel)]="password"/>
-        </label>
-        <button type="submit">Log in</button>
+      <label class="field">
+        <span>Username</span>
+        <input name="username" [(ngModel)]="username" autocomplete="username" />
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input name="password" type="password" [(ngModel)]="password" autocomplete="current-password" />
+      </label>
+      <button type="submit" class="primary">Log in</button>
     </form>
-    @if(error){
-        <p>{{ error }}</p>
+    @if (error) {
+      <p class="error-text">{{ error }}</p>
     }
-</label>
+  </div>
+</div>

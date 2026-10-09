@@ -1,12 +1,15 @@
-<app-header></app-header>
-<nav class="navbar">
-  <a routerLink="/">Home</a>
-  <a routerLink="/playground">Playground</a>
-  <a routerLink="/services-lab">Services lab</a>
-  <a routerLink="/channels">Channels</a>
-  @if( auth.hasRole('groupadmin', 'superadmin')){
-    <a routerLink="/admin">Admin</a>
-  }
-</nav>
+<header class="topbar">
+  <span class="brand">ChatPractice</span>
+  <nav class="navbar">
+    <a routerLink="/channels" routerLinkActive="active">Channels</a>
+    <a routerLink="/groups" routerLinkActive="active">Groups</a>
+    <a routerLink="/playground" routerLinkActive="active">Playground</a>
+    <a routerLink="/services-lab" routerLinkActive="active">Services lab</a>
+    @if (auth.hasRole('groupadmin', 'superadmin')) {
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    }
+  </nav>
+  <app-header></app-header>
+</header>
 
 <router-outlet></router-outlet>

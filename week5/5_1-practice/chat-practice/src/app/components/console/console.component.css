@@ -30,27 +30,15 @@
 .console-body {
     padding: 8px 12px;
     overflow-y: auto;
-    font-family: ui-monospace, Menlo, monospace;
-    font-size: 0.8em;
-}
-.console-header h3,
-.console-header button {
-    margin: 0;
-}
-
-.console-body {
-    padding: 8px 12px;
-    overflow-y: auto;
-    font-family: ui-monospace, Menlo, monospace;
+    font-family: var(--font-mono);
 }
 
 .log-line {
     padding: 2px 0;
-    white-space: pre-wrap;
-    word-break: break-word;
     margin-bottom: 4px;
     border-bottom: 1px solid var(--border);
-
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .log-time {
@@ -63,9 +51,9 @@
 }
 
 .log-line.warn {
-    color: #d97706;
+    color: var(--warning);
 }
 
 .log-line.error {
-    color: #dc2626;
+    color: var(--danger);
 }

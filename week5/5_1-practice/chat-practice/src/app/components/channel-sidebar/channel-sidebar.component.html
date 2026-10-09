@@ -1,17 +1,19 @@
 <div class="sidebar">
-  <div class="sidebar-header">Channels: {{ cs.channelCount() }}</div>
-  <ul>
+  <h3 class="sidebar-header">Channels: {{ cs.channelCount() }}</h3>
+  <ul class="channel-list">
     @for (chan of cs.channels(); track chan.id) {
-      <li>
-        <a routerLink="/channels" (click)="cs.select(chan.id)">{{ chan.name }}</a>
-        <button (click)="cs.remove(chan.id)">x</button>
+      <li [class.selected]="cs.currentChannel()?.id === chan.id">
+        <a routerLink="/channels" (click)="cs.select(chan.id)"># {{ chan.name }}</a>
+        <button type="button" class="remove" (click)="cs.remove(chan.id)" aria-label="Remove channel">×</button>
       </li>
     }
   </ul>
 
-  <form (submit)="handleSubmit($event)">
-    <p>create new channel</p>
-    <input [(ngModel)]="chName" name="chanName"/>
-    <button type="submit">Create</button>
+  <form class="create-form" (submit)="handleSubmit($event)">
+    <label class="field">
+      <span>Create new channel</span>
+      <input [(ngModel)]="chName" name="chanName" placeholder="channel name" />
+    </label>
+    <button type="submit" class="primary">Create</button>
   </form>
 </div>

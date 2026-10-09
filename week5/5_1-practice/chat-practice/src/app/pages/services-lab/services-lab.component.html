@@ -1,18 +1,26 @@
-<br>
-<br>
-<div>
-    <app-counter-display></app-counter-display>
-    <app-counter-button></app-counter-button>
+<div class="page">
+  <h2>Services lab</h2>
+  <div class="container-master">
+    <div class="container">
+      <h3>Components with their own CounterService</h3>
+      <div class="counter-row">
+        <app-counter-display></app-counter-display>
+        <app-counter-button></app-counter-button>
+      </div>
+    </div>
 
-
-    <br>
-    <br>
-
-
-    <label>Counter: id = {{ counterService.id }} </label>
-    <br>
-    <input disabled name="display" [value]="counterService.count()"/>
-    <br>
-    <button (click)="counterService.increment()" >Increment + 1</button>
-    <button (click)="counterService.reset()">Reset</button>
+    <div class="container">
+      <h3>Root CounterService</h3>
+      <div class="counter-row">
+        <label class="field">
+          <span>Counter: id = {{ counterService.id }}</span>
+          <input disabled name="display" [value]="counterService.count()" />
+        </label>
+      </div>
+      <div class="button-group">
+        <button type="button" class="primary" (click)="counterService.increment()">Increment + 1</button>
+        <button type="button" (click)="counterService.reset()">Reset</button>
+      </div>
+    </div>
+  </div>
 </div>

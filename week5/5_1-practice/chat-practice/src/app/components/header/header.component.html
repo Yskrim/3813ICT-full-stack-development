@@ -1,12 +1,14 @@
-<nav>
+<div class="user-bar">
   @if (currentUser(); as user) {
-    <div>
-      <p>logged in as {{ user.username }}</p>
-      <button (click)="logout()">logout</button>
-    </div>
+    <span class="user">
+      <span class="avatar">{{ user.username[0] }}</span>
+      {{ user.username }} <span class="role">{{ user.role }}</span>
+    </span>
+    <button type="button" (click)="logout()">logout</button>
   } @else {
+    <span class="hint">login as:</span>
     @for (user of testUsers; track user.id) {
-      <button (click)="loginAs(user.username)">login as {{ user.username }}</button>
+      <button type="button" (click)="loginAs(user.username)">{{ user.username }}</button>
     }
   }
-</nav>
+</div>

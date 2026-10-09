@@ -1,6 +1,19 @@
 .channel-header {
-    height: fit-content;
-    text-align: center;
-    padding: 20px 0;
-    border: 1px solid black;
-  }
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 16px 24px;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.channel-name {
+    font-size: 1.15em;
+    font-weight: 650;
+}
+
+.channel-id,
+.empty {
+    color: var(--text-muted);
+    font-size: 0.85em;
+}

@@ -1,0 +1,34 @@
+.user-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-bar button {
+    margin: 0;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 650;
+    text-transform: uppercase;
+}
+
+.role,
+.hint {
+    font-size: 0.85em;
+    color: var(--text-muted);
+}

@@ -1,12 +1,286 @@
+/* ---------- tokens ---------- */
+:root {
+    /* palette */
+    --bg: #f7f7f8;
+    --surface: #ffffff;
+    --surface-muted: #f2f3f5;
+    --text: #18181b;
+    --text-muted: #6b6b76;
+    --border: #e4e4e7;
+    --border-strong: #d4d4d8;
+    --accent: #4f6ef7;
+    --accent-soft: rgba(79, 110, 247, 0.1);
+    --danger: #dc2626;
+    --danger-soft: rgba(220, 38, 38, 0.1);
+    --warning: #d97706;
+    --focus-ring: 0 0 0 3px rgba(79, 110, 247, 0.25);
+
+    /* shape */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+    /* motion */
+    --ease: 150ms ease;
+
+    /* fonts */
+    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, Menlo, monospace;
+}
+
+/* Dark theme: App puts the .dark class on <app-root>, everything inside inherits it */
+.dark {
+    --bg: #0f1017;
+    --surface: #171923;
+    --surface-muted: #1f2230;
+    --text: #ececf1;
+    --text-muted: #9a9cab;
+    --border: #2a2d3c;
+    --border-strong: #3a3e52;
+    --accent: #7c93ff;
+    --accent-soft: rgba(124, 147, 255, 0.14);
+    --danger: #f87171;
+    --danger-soft: rgba(248, 113, 113, 0.14);
+    --warning: #fbbf24;
+    --focus-ring: 0 0 0 3px rgba(124, 147, 255, 0.3);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- base ---------- */
 html,
 body {
-  height: 100%;
-  margin: 0;
-}
-app-root, app-channels {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    margin: 0;
 }
 
+body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
 
+app-channels {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* ---------- page layout ---------- */
+/* wrapper for regular (scrolling) pages */
+.page {
+    padding: 40px;
+}
+
+/* ---------- typography ---------- */
+h2 {
+    margin: 0 0 20px;
+    font-size: 1.75em;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h3 {
+    margin: 0 0 12px;
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+p {
+    margin: 0 0 12px;
+    color: var(--text-muted);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+code {
+    padding: 1px 6px;
+    background-color: var(--surface-muted);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+}
+
+/* ---------- containers ---------- */
+.container-master {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+    margin: 0 0 16px;
+}
+
+.container {
+    padding: 20px 24px;
+    margin: 12px 0;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+        border-color var(--ease),
+        box-shadow var(--ease);
+}
+
+.container:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+}
+
+.button-group button {
+    margin: 0 8px 0 0;
+}
+
+.action-group button {
+    margin: 0 8px 8px 0;
+}
+
+/* ---------- controls ---------- */
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    margin: 4px 0;
+    padding: 6px 14px;
+    background-color: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background-color var(--ease),
+        border-color var(--ease);
+}
+
+button:hover {
+    background-color: var(--surface-muted);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* main action of a form or section */
+button.primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+button.primary:hover {
+    background-color: var(--accent);
+    filter: brightness(1.08);
+}
+
+input {
+    margin: 4px 8px 4px 0;
+    padding: 6px 12px;
+    background-color: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    transition:
+        border-color var(--ease),
+        box-shadow var(--ease);
+}
+
+input[type='number'] {
+    width: 8ch;
+}
+
+input:disabled {
+    background-color: var(--surface-muted);
+    border-color: var(--border);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: var(--focus-ring);
+}
+
+/* label above an input: <label class="field"><span>Name</span><input /></label> */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.field span {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.field input {
+    margin: 0;
+}
+
+.error-text {
+    color: var(--danger);
+}
+
+/* ---------- lists ---------- */
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* ---------- radio cards ---------- */
+.radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition:
+        border-color var(--ease),
+        background-color var(--ease);
+}
+
+.radio:hover {
+    background-color: var(--surface-muted);
+}
+
+.radio input {
+    margin: 0;
+    accent-color: var(--accent);
+}
+
+.radio:has(input:checked) {
+    border-color: var(--accent);
+    background-color: var(--accent-soft);
+}
+
+.radio:has(input:focus-visible) {
+    box-shadow: var(--focus-ring);
+}

@@ -1,0 +1,17 @@
+<div class="page">
+  <div class="groups-header">
+    <h2>Groups</h2>
+    <button type="button" class="primary" (click)="load()">Load</button>
+  </div>
+
+  <div class="groups-grid">
+    @for (group of groups(); track $index) {
+      <div class="container group-card">
+        <span class="group-id">#{{ group.id }}</span>
+        <span class="group-name">{{ group.name }}</span>
+      </div>
+    } @empty {
+      <p>No groups loaded yet — press Load.</p>
+    }
+  </div>
+</div>

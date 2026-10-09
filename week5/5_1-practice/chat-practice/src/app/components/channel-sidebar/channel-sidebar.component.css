@@ -1,5 +1,76 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 12px;
+}
+
 .sidebar-header {
-    padding: 20px;
-    text-align: center;
-    border: 1px solid black;
-  }
+    margin: 0;
+    padding: 0 8px;
+}
+
+.channel-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 4px 2px 8px;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--ease);
+}
+
+.channel-list li:hover {
+    background-color: var(--surface-muted);
+}
+
+.channel-list li.selected {
+    background-color: var(--accent-soft);
+}
+
+.channel-list a {
+    flex: 1;
+    padding: 4px 0;
+    color: var(--text);
+}
+
+.channel-list li.selected a {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.channel-list a:hover {
+    text-decoration: none;
+}
+
+.remove {
+    margin: 0;
+    padding: 0 8px;
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--text-muted);
+    opacity: 0;
+}
+
+.channel-list li:hover .remove,
+.remove:focus-visible {
+    opacity: 1;
+}
+
+.remove:hover {
+    background-color: var(--danger-soft);
+    color: var(--danger);
+}
+
+.create-form {
+    padding: 16px 8px 0;
+    border-top: 1px solid var(--border);
+}
+
+.create-form input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create-form button {
+    width: 100%;
+}
