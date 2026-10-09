@@ -4,157 +4,149 @@ import { PreferencesService } from '../../services/preferences.service';
 import { Preferences } from '../../services/preferences.service';
 import { FormsModule } from '@angular/forms';
 import { of, finalize, Observer, Observable, from, interval, take, throwError } from 'rxjs';
-
-
-// console.log('\n\nStart piped observer with finalize');
-// of('a', 'b', 'c')
-//   .pipe(finalize(() => console.log('stream is completed')))
-//   .subscribe({ next: (x) => console.log(x) })
-// console.log("end");
-
-
+import { ConsoleComponent } from '../../console/console.component';
+import { LogService, LogLevel } from '../../log.service';
 @Component({
-	imports: [FormsModule],
-	selector: 'app-playground',
-	styleUrl: './playground.component.css',
-	templateUrl: './playground.component.html',
+    imports: [FormsModule, ConsoleComponent],
+    selector: 'app-playground',
+    styleUrl: './playground.component.css',
+    templateUrl: './playground.component.html',
 })
-
-
 export class PlaygroundComponent {
-	private prefService = inject(PreferencesService);
-	prefs = this.prefService.prefs.asReadonly();
+    private prefService = inject(PreferencesService);
+    prefs = this.prefService.prefs.asReadonly();
 
-	updatePrefs(changes: Partial<Preferences>) {
-		this.prefService.update(changes);
-	}
+    private logService = inject(LogService);
+    private log(level: LogLevel, ...args: unknown[]): void {
+        this.logService.log(level, ...args);
+    }
 
-	constructor() {
-		console.log(this.prefs())
-	}
+    updatePrefs(changes: Partial<Preferences>) {
+        this.prefService.update(changes);
+    }
 
-	jsonPrefs = computed(() => {
-		return JSON.stringify(this.prefs());
-	})
+    constructor() {
+        this.log('log', this.prefs());
+    }
 
+    jsonPrefs = computed(() => {
+        return JSON.stringify(this.prefs());
+    });
 
-	/* ---------- observers practice 4-1 ----------- */
+    /* ---------- observers practice 4-1 ----------- */
 
-	// create an array of numbers
-	nums = [11, 9, 200, 83, 54, 7];
+    // create an array of numbers
+    nums = [11, 9, 200, 83, 54, 7];
 
-	// create a stream that will be returning the values one by one
-	private readonly number$: Observable<number> = from(this.nums)
+    // create a stream that will be returning the values one by one
+    private readonly number$: Observable<number> = from(this.nums);
 
-	// method that triggers the stream
-	subscribeNumbers(): void {
+    // method that triggers the stream
+    subscribeNumbers(): void {
+        // what to do with the values in the stream
+        const observer: Observer<number> = {
+            next: (num) => this.log('log', 'Now observing this num: ', num),
+            error: (err) => this.log('log', 'Error: ', err),
+            complete: () => this.log('log', 'Stream complete'),
+        };
 
-		// what to do with the values in the stream
-		const observer: Observer<number> = {
-			next: (num) => console.log("Now observing this num: ", num),
-			error: (err) => console.log("Error: ", err),
-			complete: () => console.log("Stream complete"),
-		};
+        // subscribe the stream => run the observable.
+        this.number$.subscribe(observer);
+    }
 
-		// subscribe the stream => run the observable.
-		this.number$.subscribe(observer);
-	}
+    /* ----------  ЧАСТЬ А ----------- */
+    partA1(): void {
+        // regular observer as a three method object
+        this.log('log', 'start');
+        of('a', 'b', 'c').subscribe({
+            next: (x) => this.log('log', x),
+            error: (err) => this.log('log', err),
+            complete: () => this.log('log', 'stream complete'),
+        });
+        this.log('log', 'end');
+    }
 
-	/* ----------  ЧАСТЬ А ----------- */
-	partA1(): void {
-		// regular observer as a three method object
-		console.log('start');
-		of('a', 'b', 'c').subscribe({
-			next: (x) => console.log(x),
-			error: (err) => console.log(err),
-			complete: () => console.log('stream complete')
-		})
-		console.log("end");
-	}
+    partA2(): void {
+        this.log('log', 'start');
+        of('a', 'b', 'c');
+        this.log('log', 'end');
+    }
 
-	partA2(): void {
-		console.log('start');
-		of('a', 'b', 'c');
-		console.log("end");
-	}
+    /* ----------  ЧАСТЬ Б ----------- */
+    partB1(): void {
+        const interval$ = interval(500);
 
-	/* ----------  ЧАСТЬ Б ----------- */
-	partB1(): void {
-		const interval$ = interval(500);
+        const subscription = interval$.subscribe({
+            next: (x) => this.log('log', x),
+            error: (err) => this.log('error', err),
+            complete: () => this.log('log', 'stream complete'),
+        });
 
-		const subscription = interval$.subscribe({
-			next: (x) => console.log(x),
-			error: (err) => console.error(err),
-			complete: () => console.log('stream complete')
-		})
+        setTimeout(() => {
+            subscription.unsubscribe();
+        }, 2000);
+    }
 
-		setTimeout(() => {
-			subscription.unsubscribe();
-		}, 2000);
-	}
+    partB1_1(): void {
+        const sub$ = interval(500).pipe(take(4)); // .pipe(take(n)) completes the stream, unlike setTimeout that just stops it. Here pipe streams the data and take 4 is a delimiter on when to stop the stream. Once it fulfills, pipe ends
+        sub$.subscribe({
+            next: (value) => this.log('log', value),
+            complete: () => this.log('log', 'stream complete'),
+        });
+    }
 
-	partB1_1(): void {
-		const sub$ = interval(500).pipe(take(4)); // .pipe(take(n)) completes the stream, unlike setTimeout that just stops it. Here pipe streams the data and take 4 is a delimiter on when to stop the stream. Once it fulfills, pipe ends
-		sub$.subscribe({
-			next: (value) => console.log(value),
-			complete: () => console.log('stream complete')
-		})
-	}
+    /* ----------  ЧАСТЬ В ----------- */
+    partC1(): void {
+        const err$ = throwError(() => new Error('Boom!'));
 
+        err$.subscribe({
+            next: (value) => this.log('log', value),
+            error: (err) => this.log('log', err), // always executed on this stream
+            complete: () => this.log('log', 'stream complete'), // never executed
+        });
+    }
 
-	/* ----------  ЧАСТЬ В ----------- */
-	partC1(): void {
-		const err$ = throwError(() => new Error('Boom!'));
+    partC2(): void {
+        const err$ = throwError(() => new Error('Boom!')).pipe(finalize(() => this.log('log', 'This stream is finalized')));
 
-		err$.subscribe({
-			next: (value) => console.log(value),
-			error: (err) => console.table(err), // always executed on this stream
-			complete: () => console.log('stream complete') // never executed 
-		})
-	}
+        err$.subscribe({
+            next: (value) => this.log('log', value),
+            error: (err) => this.log('log', err), // always executed on this stream, but then pipe is forwarding the stream to finalize which runs it's own callback.
+            complete: () => this.log('log', 'stream complete'), // never executed
+        });
+    }
 
-	partC2(): void {
-		const err$ = throwError(() => new Error('Boom!')).pipe(finalize(() => console.log('This stream is finalized')))
+    /* ----------  ЧАСТЬ Г ----------- */
 
-		err$.subscribe({
-			next: (value) => console.log(value),
-			error: (err) => console.table(err), // always executed on this stream, but then pipe is forwarding the stream to finalize which runs it's own callback.
-			complete: () => console.log('stream complete') // never executed
-		})
-	}
+    private http = inject(HttpClient);
 
-	/* ----------  ЧАСТЬ Г ----------- */
+    partD1(): void {
+        const http$ = this.http.get('/api/health');
 
-	private http = inject(HttpClient);
+        this.log('log', new Date().toISOString());
+        http$.subscribe({
+            next: (data) => this.log('log', data),
+            error: (err) => this.log('warn', err),
+            complete: () => this.log('info', 'request stream complete'),
+        });
+        this.log('log', new Date().toISOString());
+    }
 
+    partD2(): void {
+        const http$ = this.http.get('/api/unknown');
+        http$.subscribe({
+            next: (data) => this.log('log', data),
+            error: (err) => this.log('warn', err),
+            complete: () => this.log('info', 'request stream complete'),
+        });
+    }
 
-	partD1(): void {
-		const http$ = this.http.get('/api/health')
-
-		console.log(new Date().toISOString())
-		http$.subscribe({
-			next: (data) => console.table(data),
-			error: (err) => console.warn(err),
-			complete: () => console.info("request stream complete")
-		})
-		console.log(new Date().toISOString())
-	}
-
-	partD2(): void {
-		const http$ = this.http.get('/api/unknown')
-		http$.subscribe({
-			next: (data) => console.table(data),
-			error: (err) => console.warn(err),
-			complete: () => console.info("request stream complete")
-		})
-	}
-
-	partD3(): void {
-		const http$ = this.http.get('/api/ping')
-		http$.subscribe({
-			next: (data) => console.log(data),
-			error: (err) => console.warn(err),
-			complete: () => console.info("request stream complete")
-		})
-	}
+    partD3(): void {
+        const http$ = this.http.get('/api/ping');
+        http$.subscribe({
+            next: (data) => this.log('log', data),
+            error: (err) => this.log('warn', err),
+            complete: () => this.log('info', 'request stream complete'),
+        });
+    }
 }

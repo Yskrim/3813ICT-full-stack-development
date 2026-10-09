@@ -1,0 +1,16 @@
+<div class="console">
+  <div class="console-header">
+    <h3>Console</h3>
+    <button type="button" (click)="clear()">clear</button>
+  </div>
+  <div class="console-body" #body>
+    @for (entry of logs(); track $index) {
+      <div class="log-line" [class]="entry.level">
+        <span class="log-time">{{ entry.time }}</span
+        >{{ entry.text }}
+      </div>
+    } @empty {
+      <div class="log-line log-time">Press any button…</div>
+    }
+  </div>
+</div>

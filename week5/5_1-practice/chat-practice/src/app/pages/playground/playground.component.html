@@ -51,12 +51,8 @@
         <input type="number" disabled name="display" [value]="prefs().lastChannelId" />
         <input type="number" #channelInput [value]="prefs().lastChannelId" />
         <div class="arrow-container">
-          <button (click)="channelInput.value = (channelInput.valueAsNumber + 1).toString()">
-            ↑
-          </button>
-          <button (click)="channelInput.value = (channelInput.valueAsNumber - 1).toString()">
-            ↓
-          </button>
+          <button (click)="channelInput.value = (channelInput.valueAsNumber + 1).toString()">↑</button>
+          <button (click)="channelInput.value = (channelInput.valueAsNumber - 1).toString()">↓</button>
         </div>
 
         <button
@@ -76,9 +72,7 @@
     </div>
   </form>
 
-  <hr />
-  <br />
-  <br />
+  <hr /><br /><br />
 
   <h2>Observable practice: Task 4-1</h2>
   <div class="container-master">
@@ -94,8 +88,8 @@
       <p>Order of operation</p>
       <div class="container">
         <p>
-          1. observable is set as a clickable function that subscribes the stream and runs the
-          observer with three methods
+          1. observable is set as a clickable function that subscribes the stream and runs the observer with three
+          methods
         </p>
         <button (click)="partA1()">Subscribe stream</button>
       </div>
@@ -109,32 +103,25 @@
       <h3>PART B - Stream in timeline</h3>
       <div class="container">
         <p>
-          1. This is an attempt to use the <code>interval()</code> from RxJS. It does not stop until
-          either one happens:
+          1. This is an attempt to use the <code>interval()</code> from RxJS. It does not stop until either one happens:
         </p>
 
-        <p>
-          <code>setTimeout(()=> , N_ms)</code> is unsubscribing the subscription stored in an own
-          variable manually
-        </p>
+        <p><code>setTimeout(()=> , N_ms)</code> is unsubscribing the subscription stored in an own variable manually</p>
 
-        <p>
-          <code>.pipe(take(N))</code>: takes N of values from the interval stops it once fulfilled
-        </p>
+        <p><code>.pipe(take(N))</code>: takes N of values from the interval stops it once fulfilled</p>
         <div class="action-group">
-            <button (click)="partB1()">Subscribe to interval with setTimeout</button>
-            <button (click)="partB1_1()">Subscribe to interval with .pipe(take(n))</button>
+          <button (click)="partB1()">Subscribe to interval with setTimeout</button>
+          <button (click)="partB1_1()">Subscribe to interval with .pipe(take(n))</button>
         </div>
       </div>
-
 
       <h3>PART C - Error Stream</h3>
       <div class="container">
         <p>This one subscribes to the error stream knowingly</p>
 
         <div class="action-group">
-            <button (click)="partC1()">Sub to error stream</button>
-            <button (click)="partC2()">Sub to a finalized error stream</button>
+          <button (click)="partC1()">Sub to error stream</button>
+          <button (click)="partC2()">Sub to a finalized error stream</button>
         </div>
       </div>
 
@@ -143,11 +130,13 @@
         <p>Now we are communicating with the server at localhost:3000</p>
 
         <div class="action-group">
-            <button (click)="partD1()">Sub to health api request</button>
-            <button (click)="partD2()">Sub to unknown api req</button>
-            <button (click)="partD3()">Sub to cached api</button>
+          <button (click)="partD1()">Sub to health api request</button>
+          <button (click)="partD2()">Sub to unknown api req</button>
+          <button (click)="partD3()">Sub to cached api</button>
         </div>
       </div>
     </div>
   </div>
+
+  <app-console></app-console>
 </div>
