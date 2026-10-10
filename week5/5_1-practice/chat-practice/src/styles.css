@@ -160,6 +160,10 @@ input {
     color: inherit;
 }
 
+.error {
+    border-color: var(--danger);
+}
+
 button {
     margin: 4px 0;
     padding: 6px 14px;

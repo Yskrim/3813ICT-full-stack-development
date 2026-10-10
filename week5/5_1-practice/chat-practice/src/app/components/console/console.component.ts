@@ -1,5 +1,5 @@
 import { Component, inject, afterRenderEffect, ElementRef, viewChild } from '@angular/core';
-import { LogService } from '../log.service';
+import { LogService } from '../../services/log.service';
 
 type LogLevel = 'log' | 'info' | 'warn' | 'error';
 

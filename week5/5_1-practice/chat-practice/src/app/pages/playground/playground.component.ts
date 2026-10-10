@@ -4,8 +4,9 @@ import { PreferencesService } from '../../services/preferences.service';
 import { Preferences } from '../../services/preferences.service';
 import { FormsModule } from '@angular/forms';
 import { of, finalize, Observer, Observable, from, interval, take, throwError } from 'rxjs';
-import { ConsoleComponent } from '../../console/console.component';
-import { LogService, LogLevel } from '../../log.service';
+import { ConsoleComponent } from '../../components/console/console.component';
+import { LogService, LogLevel } from '../../services/log.service';
+
 @Component({
     imports: [FormsModule, ConsoleComponent],
     selector: 'app-playground',

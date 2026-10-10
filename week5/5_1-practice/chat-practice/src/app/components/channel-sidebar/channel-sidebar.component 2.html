@@ -1,0 +1,17 @@
+<div class="sidebar">
+  <div class="sidebar-header">Channels: {{ cs.channelCount() }}</div>
+  <ul>
+    @for (chan of cs.channels(); track chan.id) {
+      <li>
+        <a routerLink="/channels" (click)="cs.select(chan.id)">{{ chan.name }}</a>
+        <button (click)="cs.remove(chan.id)">x</button>
+      </li>
+    }
+  </ul>
+
+  <form (submit)="handleSubmit($event)">
+    <p>create new channel</p>
+    <input [(ngModel)]="chName" name="chanName"/>
+    <button type="submit">Create</button>
+  </form>
+</div>

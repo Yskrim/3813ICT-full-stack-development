@@ -1,17 +1,85 @@
 <div class="page">
   <div class="groups-header">
     <h2>Groups</h2>
-    <button type="button" class="primary" (click)="load()">Load</button>
+    <button type="button" class="primary" (click)="load()">
+      {{ isProcessing() === 'load' ? 'Loading...' : 'Load' }}
+    </button>
   </div>
 
   <div class="groups-grid">
-    @for (group of groups(); track $index) {
+    @for (group of groups(); track group.id) {
       <div class="container group-card">
         <span class="group-id">#{{ group.id }}</span>
         <span class="group-name">{{ group.name }}</span>
       </div>
     } @empty {
-      <p>No groups loaded yet — press Load.</p>
-    }
+      @if (isError() === 'load') {
+        <p [style]="'color: var(--danger);'">{{ ErrorMessage() }}</p>
+      } @else {
+        <p>No groups loaded yet — press Load.</p>
+      }
+    } 
+
+
+  </div>
+
+  <div>
+    <div class="container">
+      <h3>Create a new group</h3>
+      <input
+        [class.error]="isError() === 'create'"
+        (change)="isError() === 'create' && isError.set(null)"
+        [(ngModel)]="createName"
+        placeholder="group name"
+      />
+      <button type="button" class="primary" [disabled]="isProcessing()" (click)="create()">
+        {{ isProcessing() === 'create' ? 'Creating...' : 'Create' }}
+      </button>
+      @if (isError() === 'create') {
+        <p [style]="'color: var(--danger);'">{{ ErrorMessage() }}</p>
+      }
+    </div>
+
+    <div class="container">
+      <h3>Rename a group</h3>
+      <input
+        [class.error]="isError() === 'rename'"
+        (change)="isError() === 'rename' && isError.set(null)"
+        [(ngModel)]="renameId"
+        placeholder="group id"
+        type="number"
+      />
+      <input
+        [class.error]="isError() === 'rename'"
+        (change)="isError() === 'rename' && isError.set(null)"
+        [(ngModel)]="renameName"
+        placeholder="name"
+        type="text"
+      />
+
+      <button type="button" class="primary" [disabled]="isProcessing()" (click)="rename()">
+        {{ isProcessing() === 'rename' ? 'Updating...' : 'Update' }}
+      </button>
+      @if (isError() === 'rename') {
+        <p [style]="'color: var(--danger);'">{{ ErrorMessage() }}</p>
+      }
+    </div>
+
+    <div class="container">
+      <h3>Delete a group</h3>
+      <input
+        [class.error]="isError() === 'delete'"
+        (change)="isError() === 'delete' && isError.set(null)"
+        [(ngModel)]="deleteId"
+        placeholder="group id"
+        type="number"
+      />
+      <button type="button" class="primary" [disabled]="isProcessing()" (click)="delete()">
+        {{ isProcessing() === 'delete' ? 'Deleting...' : 'Delete' }}
+      </button>
+      @if (isError() === 'delete') {
+        <p [style]="'color: var(--danger);'">{{ ErrorMessage() }}</p>
+      }
+    </div>
   </div>
 </div>
