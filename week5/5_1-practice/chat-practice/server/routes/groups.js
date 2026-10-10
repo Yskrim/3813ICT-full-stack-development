@@ -13,7 +13,7 @@ router.get('/', (req, res) => setTimeout(() => res.json(groups), 800));
 router.post('/', (req, res) => {
     const name = (req.body?.name ?? '').trim();
     if (!name) return res.status(400).json({ error: 'Name is required' });
-    
+
     const group = { id: nextId++, name };
     groups.push(group);
     res.status(201).json(group);

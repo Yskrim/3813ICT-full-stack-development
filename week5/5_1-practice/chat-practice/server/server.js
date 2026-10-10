@@ -8,7 +8,7 @@ const PORT = 3000;
 
 // middleware
   app.use(express.json());
-  
+  app.use('/api/groups', require('./routes/groups'))
   // app.use(cors({
   //     origin: 'http://localhost:4200'
   // }));
